@@ -1,4 +1,4 @@
-# AI Contract CheckA tranquil digital wellness platform built with modern web technologies.
+# AI Contract Check
 
 ## Tech Stack
 
