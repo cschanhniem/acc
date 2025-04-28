@@ -83,10 +83,7 @@ packages/
 
 ### Key Features
 
-- 🎵 Ambient Sound Library
-- 💭 Whispers System
-- 🌈 Theme Customization
-- 👥 Community Features
+
 - 🔒 Secure Authentication
 - 🌐 Global CDN Distribution
 
