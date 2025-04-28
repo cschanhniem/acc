@@ -1,0 +1,9 @@
+[auth]
+token = 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
+
+[defaults]
+org=xgpt-gf
+project=peaceflow
+
+[http]
+verify_ssl=true

@@ -1,0 +1,31 @@
+name = "aicontractcheck"
+main = "src/index.ts"
+compatibility_date = "2024-02-01"
+
+# App configuration
+[vars]
+ENVIRONMENT = "development"
+FRONTEND_URL = "http://localhost:5173"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "contracts"
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "aicontractcheck"
+database_id = "aicontractcheck-db"
+migrations_dir = "migrations"
+
+# Add secrets via 'wrangler secret put <NAME>'
+# Required secrets:
+# - JWT_SECRET
+# - OPENAI_API_KEY
+# - STRIPE_SECRET_KEY
+# - STRIPE_WEBHOOK_SECRET
+# - R2_ACCESS_KEY_ID
+# - R2_SECRET_ACCESS_KEY
+
+[triggers]
+crons = []

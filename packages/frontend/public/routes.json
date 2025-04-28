@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "routes": [
+    { "src": "/auth/callback", "dest": "/index.html" },
+    { "src": "/auth/*", "dest": "/index.html" },
+    { "src": "/*", "dest": "/index.html" }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

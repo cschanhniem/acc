@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Design System Colors */
+    --color-navy: #1A365D;
+    --color-sage: #6B9080;
+    --color-slate: #4A5568;
+    --color-light-blue: #EBF8FF;
+    --color-alert: #F6AD55;
+    --color-warning: #FC8181;
+    --color-success: #68D391;
+    --color-white: #FFFFFF;
+    --color-light-gray: #F7FAFC;
+    --color-medium-gray: #E2E8F0;
+    --color-dark-gray: #2D3748;
+
+    /* Shadows */
+    --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-dropdown: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-button: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+    @apply text-slate bg-white antialiased min-h-screen;
+  }
+
+  body {
+    @apply antialiased min-h-screen;
+  }
+
+  /* Typography Styles */
+  h1 {
+    @apply text-h1 text-navy mb-6;
+  }
+
+  h2 {
+    @apply text-h2 text-navy mb-4;
+  }
+
+  h3 {
+    @apply text-h3 text-navy mb-3;
+  }
+
+  h4 {
+    @apply text-h4 text-navy mb-2;
+  }
+
+  p {
+    @apply text-body text-slate mb-4;
+  }
+
+  /* Focus Styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-navy ring-offset-2;
+  }
+}
+
+@layer components {
+  /* Container */
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-content;
+  }
+
+  /* Button Base */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  /* Button Variants */
+  .btn-primary {
+    @apply btn bg-navy text-white hover:bg-opacity-90 focus:ring-navy;
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-navy text-navy hover:bg-navy hover:text-white focus:ring-navy;
+  }
+
+  .btn-tertiary {
+    @apply btn text-navy hover:bg-light-blue focus:ring-navy;
+  }
+
+  /* Form Controls */
+  .form-input {
+    @apply w-full px-3 py-2 border border-medium-gray rounded focus:border-navy focus:ring-2 focus:ring-navy focus:ring-offset-2;
+  }
+
+  .form-label {
+    @apply block text-small font-medium text-slate mb-1;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white rounded shadow-card p-6;
+  }
+
+  /* Alert Base */
+  .alert {
+    @apply p-4 mb-4 rounded flex items-start;
+  }
+
+  /* Alert Variants */
+  .alert-info {
+    @apply alert bg-light-blue text-navy;
+  }
+
+  .alert-success {
+    @apply alert bg-success bg-opacity-10 text-success;
+  }
+
+  .alert-warning {
+    @apply alert bg-alert bg-opacity-10 text-alert;
+  }
+
+  .alert-error {
+    @apply alert bg-warning bg-opacity-10 text-warning;
+  }
+}

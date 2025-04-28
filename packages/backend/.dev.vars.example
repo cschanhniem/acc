@@ -1,0 +1,19 @@
+# Authentication
+JWT_SECRET=your-jwt-secret-here
+
+# AI Service
+OPENAI_API_KEY=your-openai-api-key-here
+
+# Stripe Integration
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=whsec_your_stripe_webhook_secret
+
+# Application URLs
+FRONTEND_URL=http://localhost:3000
+
+# Storage
+R2_ACCESS_KEY_ID=your-r2-access-key-id
+R2_SECRET_ACCESS_KEY=your-r2-secret-access-key
+R2_BUCKET_NAME=contracts
+
+GEMINI_API_KEY=AIzaSyAQKa
