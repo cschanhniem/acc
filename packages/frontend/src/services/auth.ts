@@ -3,6 +3,46 @@ import { useAuthStore } from "../stores/auth";
 import api from "./api";
 
 export const authService = {
+  // Login with email and password
+  emailLogin: async (email: string, password: string) => {
+    const { setUser, setAccessToken, setError } = useAuthStore.getState();
+
+    try {
+      const { data } = await api.post<AuthResponse>("/auth/login", {
+        email,
+        password,
+      });
+
+      setUser(data.user);
+      setAccessToken(data.tokens.accessToken);
+
+      return data;
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Authentication failed");
+      throw error;
+    }
+  },
+
+  // Register with email, password and name
+  signup: async (email: string, password: string, name: string) => {
+    const { setUser, setAccessToken, setError } = useAuthStore.getState();
+    try {
+      const { data } = await api.post<AuthResponse>("/auth/signup", {
+        email,
+        password,
+        name
+      })
+  
+      setUser(data.user);
+      setAccessToken(data.tokens.accessToken);
+  
+      return data
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Authentication failed");
+      throw error;
+    }
+  },
+
   // Generate Google OAuth URL
   getGoogleAuthUrl: () => {
     const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";

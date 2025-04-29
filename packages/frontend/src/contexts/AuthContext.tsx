@@ -4,6 +4,8 @@ import { authService } from "../services/auth";
 
 interface AuthContextType {
   login: () => void;
+  emailLogin: (email: string, password: string) => Promise<void>;
+  signup: (email: string, password: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -47,6 +49,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value = {
     login,
+    emailLogin: authService.emailLogin,
+    signup: authService.signup,
     logout: authService.logout,
   };
 

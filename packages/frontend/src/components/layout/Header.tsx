@@ -47,7 +47,7 @@ export default function Header() {
             {isAuthenticated ? (
               <>
                 <span className="text-text-secondary mr-4 hidden md:inline-block">
-                  Hello, {user?.displayName}
+                  Hello, {user?.name}
                 </span>
                 <button onClick={handleLogout} className="btn-secondary">
                   Logout

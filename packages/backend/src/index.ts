@@ -7,6 +7,7 @@ import { contracts } from './routes/contracts';
 import { billing } from './routes/billing';
 import type { AppBindings } from './types/bindings';
 import type { ApiErrorResponse, HealthCheckResponse } from '@aicontractcheck/shared';
+import authRoute from './routes/auth';
 
 // Create the app
 const app = new Hono<AppBindings>();
@@ -30,6 +31,7 @@ app.use('/api/*', auth);
 // Routes
 app.route('/api/contracts', contracts);
 app.route('/api/billing', billing);
+app.route('/auth', authRoute);
 
 // Add subscription check to contract routes
 app.use('/api/contracts/*', subscriptionCheck);
