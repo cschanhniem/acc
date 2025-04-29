@@ -8,27 +8,45 @@ export class UserModel {
   async create(user: Omit<User, 'id' | 'created_at'>): QueryResult<User> {
     const id = nanoid();
     try {
-      await this.db.prepare(`
+      const query = `
         INSERT INTO users (
-          id, email, name, password_hash, subscription_tier, subscription_ends_at,
-          stripe_customer_id, stripe_subscription_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      `).bind(
+          id, 
+          email, 
+          name, 
+          password_hash, 
+          subscription_tier, 
+          subscription_ends_at,
+          stripe_customer_id, 
+          stripe_subscription_id
+        ) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        RETURNING *
+      `;
+  
+      const params = [
         id,
         user.email,
         user.name,
-        user.password_hash, // Added password_hash
-        user.subscription_tier,
-        user.subscription_ends_at,
-        user.stripe_customer_id,
-        user.stripe_subscription_id
-      ).run();
-
-      const result = await this.findById(id);
-      return result;
+        user.password_hash || null,
+        user.subscription_tier || 'free',
+        user.subscription_ends_at || null,
+        user.stripe_customer_id || null,
+        user.stripe_subscription_id || null
+      ];
+  
+      const result = await this.db
+        .prepare(query)
+        .bind(...params)
+        .first<User>();
+  
+      if (!result) {
+        return { success: false, error: 'Failed to create user' };
+      }
+  
+      return { success: true, data: result };
     } catch (error) {
       console.error('Error creating user:', error);
-      return { success: false, error: 'Failed to create user' };
+      return { success: false, error: String(error) };
     }
   }
 

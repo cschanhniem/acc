@@ -1,21 +1,95 @@
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import LegalDisclaimer from "../../components/common/LegalDisclaimer";
+import { useState } from "react";
 
 export default function Login() {
-  const { login } = useAuth();
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const { login, emailLogin, signup } = useAuth();
   const location = useLocation();
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/";
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (isLogin) {
+        await emailLogin(email, password);
+      } else {
+        await signup(email, password, name);
+      }
+    } catch (error) {
+      console.error("Auth error:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="max-w-md w-full space-y-8 p-8 bg-surface rounded-lg shadow-lg">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome to AI Contract Check</h2>
-          <p className="text-text-secondary">Sign in to continue your journey to digital wellness</p>
+          <p className="text-text-secondary">
+            Sign in to continue your journey to digital wellness
+          </p>
         </div>
 
         <div className="mt-8 space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {!isLogin && (
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Full Name"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                required
+              />
+            )}
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email Address"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-navy text-white py-2 px-4 rounded-md hover:bg-navy/90 transition-colors duration-200"
+            >
+              {isLogin ? "Sign In" : "Sign Up"}
+            </button>
+          </form>
+
+          <div className="text-center">
+            <button
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-primary hover:text-primary/90"
+            >
+              {isLogin ? "Need an account? Sign up" : "Already have an account? Sign in"}
+            </button>
+          </div>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-surface text-gray-500">Or continue with</span>
+            </div>
+          </div>
+
           <button
             onClick={login}
             className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 border border-gray-300 rounded-lg transition-colors duration-200"
@@ -30,7 +104,6 @@ export default function Login() {
           </button>
         </div>
 
-        {/* Add Legal Disclaimer */}
         <div className="mt-6">
           <LegalDisclaimer className="text-tiny" />
         </div>

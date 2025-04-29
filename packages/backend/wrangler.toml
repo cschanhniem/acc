@@ -15,7 +15,7 @@ bucket_name = "contracts"
 [[d1_databases]]
 binding = "DB"
 database_name = "aicontractcheck"
-database_id = "aicontractcheck-db"
+database_id = "a69f2c1a-f2d1-4745-a31f-bd9778972ad3"
 migrations_dir = "migrations"
 
 # Add secrets via 'wrangler secret put <NAME>'
