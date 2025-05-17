@@ -1,7 +1,8 @@
-export interface Env { // Add export here
+export interface Env {
+  // Add export here
   // R2 bucket for file storage
   BUCKET: R2Bucket;
-  
+
   // Queue for analysis jobs
   ANALYSIS_QUEUE: Queue;
 
@@ -20,9 +21,13 @@ export interface Env { // Add export here
 
   // Application URLs
   FRONTEND_URL: string;
-  
+
   // Environment settings
-  ENVIRONMENT: 'development' | 'staging' | 'production';
+  ENVIRONMENT: "development" | "staging" | "production";
+
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  USERS: KVNamespace;
 }
 
 export {}; // Add this line to make it a module

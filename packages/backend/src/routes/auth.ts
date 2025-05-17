@@ -342,7 +342,7 @@ auth.post("/google", async (c: Context<AppEnv>) => { // Type c
 
     // Check if user exists, if not create one
     const userModel = new UserModel(c.env.DB);
-    let userResult = await userModel.findByEmail(googleUser.email);
+    const userResult = await userModel.findByEmail(googleUser.email);
     let user: User;
 
     if (!userResult.success) {

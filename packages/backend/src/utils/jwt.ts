@@ -19,17 +19,20 @@ export async function verify(token: string, secret: string): Promise<JWTPayload>
   }
 }
 
-export async function sign(payload: Omit<JWTPayload, 'exp'>, secret: string): Promise<string> {
+export async function sign(payload: Omit<JWTPayload, 'exp'>, secret: string, exp?: number): Promise<string> {
   // For development, just create a simple token
   // TODO: Implement proper JWT signing
-  const exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60; // 24 hours
+ const expiration = exp ?? (Math.floor(Date.now() / 1000) + 24 * 60 * 60);
+
   const tokenPayload = {
     ...payload,
-    exp,
+    exp: expiration,
   };
+
   const base64Payload = btoa(JSON.stringify(tokenPayload))
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
     .replace(/=/g, '');
+
   return `dev.${base64Payload}.sig`;
 }
