@@ -2,10 +2,14 @@ name = "aicontractcheck"
 main = "src/index.ts"
 compatibility_date = "2024-02-01"
 
+
+[env.development]
+
+
 # App configuration
 [vars]
 ENVIRONMENT = "development"
-FRONTEND_URL = "http://localhost:5173"
+FRONTEND_URL = "http://localhost:3000"
 
 [[r2_buckets]]
 binding = "BUCKET"
@@ -17,6 +21,20 @@ binding = "DB"
 database_name = "aicontractcheck"
 database_id = "aicontractcheck-db"
 migrations_dir = "migrations"
+
+# KV Namespaces
+[[kv_namespaces]]
+binding = "USERS"
+id = "9b939cc03d894e69b8a66e400322ec64"
+
+[[kv_namespaces]]
+binding = "WHISPERS"
+id = "f95c618f54f54860a032180eebce699a"
+
+[[kv_namespaces]]
+binding = "LIKES"
+id = "66997a040f7842f484a48db5ff721145"
+
 
 # Add secrets via 'wrangler secret put <NAME>'
 # Required secrets:
